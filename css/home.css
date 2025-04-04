@@ -1,0 +1,101 @@
+/** {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    box-sizing: border-box;*/
+/*}*/
+
+/*html,*/
+/*body {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    height: 100%;*/
+/*    font-family: Arial, sans-serif;*/
+/*    !* Thêm font mặc định để đồng bộ *!*/
+/*}*/
+
+/*.header-container {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*    padding: 15px 30px;*/
+/*    background: #60a3bc;*/
+/*    height: 60px;*/
+/*}*/
+
+/*.textLogo {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    gap: 8px;*/
+/*}*/
+
+/*.textLogo h3 {*/
+/*    color: #fff;*/
+/*    font-size: 24px;*/
+/*    margin: 0;*/
+/*}*/
+/*.searchBar {*/
+/*    position: relative;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    gap: 10px;*/
+/*}*/
+
+/*#inputSearch {*/
+/*    width: 300px;*/
+/*    padding: 8px 30px 8px 10px;*/
+/*    height: 38px;*/
+/*    border-radius: 5px;*/
+/*    border: 1px solid #ccc;*/
+/*}*/
+
+/*#iconSearch {*/
+/*    position: absolute;*/
+/*    right: 10px;*/
+/*    top: 50%;*/
+/*    transform: translateY(-50%);*/
+/*    color: #bababa;*/
+/*    font-size: 16px;*/
+/*}*/
+
+/*.navMenu ul {*/
+/*    display: flex;*/
+/*    gap: 20px;*/
+/*    list-style: none;*/
+/*    margin: 0;*/
+/*}*/
+
+/*.navMenu a {*/
+/*    text-decoration: none;*/
+/*    font-size: 16px;*/
+/*    font-weight: 500;*/
+/*    color: #fff;*/
+/*}*/
+
+/*.navMenu a:hover {*/
+/*    color: #ddd;*/
+/*}*/
+
+/*#sort{*/
+/*    width: 200px;*/
+/*}*/
+
+/*.quizzList {*/
+/*    !* display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    flex-direction: column;*/
+/*    padding: 20px; *!*/
+/*            display: grid;*/
+/*            grid-template-columns: repeat(2, 4fr);*/
+/*            !* 4 cột *!*/
+/*            gap: 20px;*/
+/*            !* Khoảng cách giữa các bài quiz *!*/
+/*            max-width: 1200px;*/
+/*            margin: 20px auto;*/
+/*            padding: 0 30px;*/
+/*}*/
+
+/*.quizzList h2 {*/
+/*    font-size: 24px;*/
+/*    margin-bottom: 20px;*/
+/*}*/

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizzForge</title>
+    <link rel="stylesheet" href="../css/test.css">
+</head>
+
+<body>
+    <header class="navbar">
+        <h1>QuizzForge</h1>
+        <input type="text" placeholder="Tìm kiếm bài test">
+        <nav>
+            <a href="#">Trang chủ</a>
+            <a href="#" class="logout">Đăng xuất</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>Điều hướng nhanh</h3>
+            <div class="pagination" id="pagination"></div>
+            <p class="note">Lưu ý: Bấm để chọn câu hỏi hoặc sử dụng điều hướng.</p>
+        </aside>
+
+        <main class="quiz-container">
+            <h2>Khoa học máy tính</h2>
+            <p class="question-number">Câu hỏi <span id="question-index">1</span> trên 20:</p>
+            <p id="question-text"></p>
+            <div id="answers"></div>
+
+            <div class="buttons">
+                <button id="prev-btn">Trước</button>
+                <button id="next-btn" class="primary">Tiếp</button>
+                <button id="complete-btn" class="success">Hoàn thành</button>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        &copy; 2025 Quiz App. All rights reserved.
+    </footer>
+    <script src="../js/test.js"></script>
+</body>
+
+</html>

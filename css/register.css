@@ -1,0 +1,34 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.input-group-text {
+    background: #8a8282 !important;
+}
+
+#btnSignUp {
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    background: #beb6b6 !important;
+}
+
+#btnSignUp:hover {
+    background: #989191 !important;
+}
+
+.text {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    display: none;
+    margin-top: 5px;
+}

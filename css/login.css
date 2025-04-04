@@ -1,0 +1,35 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    /* background: #60a3bc !important; */
+}
+
+/* .brand_logo {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    border: 2px solid white;
+} */
+
+.form_container {
+    margin-top: 100px;
+}
+
+.input-group-text {
+    background: #8a8282 !important;
+    /* border: 0 !important; */
+}
+
+#btnLogIn{
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    background: #beb6b6 !important;
+}
+
+#btnLogIn:hover{
+    /* opacity: 0.5; */
+    background: #989191 !important;
+}

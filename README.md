@@ -1,0 +1,1 @@
+Source(emoji): https://emojipedia.org/emoji-playground

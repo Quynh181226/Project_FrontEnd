@@ -54,15 +54,29 @@ body {
     margin-bottom: 15px;
 }
 
-.row {
+/* .row {
     display: flex;
     gap: 20px;
-}
-
-.row>div {
+    justify-content: start;
+} */
+/* .row{
+    display: flex;
+    /* gap: 20px;
+    margin-bottom: 20px; */
+/* }  */
+/* .row div {
     flex: 1;
+} */
+.row div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    /* flex: 1;
+    width: 50%; */
 }
-
+/* #testName{
+    flex: 3;
+} */
 .btn-primary {
     background-color: #007bff;
     border: none;
@@ -171,6 +185,7 @@ body {
 .btnDelete {
     position: absolute;
     right: 10px;
+    top: 6px;
 }
 
 .form-control {
@@ -180,3 +195,17 @@ body {
 .input-group-text {
     padding: 10px;
 }
+/* .CateSelect{
+    display: flex;
+    flex-direction: column;
+}
+#category{
+    padding: 8px;
+    border: 1px solid #DEE2E6;
+    border-radius: 4px;
+} */
+ .btnAddSave{
+    display: flex;
+    justify-content: space-between;
+    /* cursor: pointer; */
+ }

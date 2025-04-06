@@ -65,7 +65,6 @@
             }
         ];
 
-// let filteredQuizzes = [...quizzes];
         let filteredQuizzes = quizzes.slice();
         const totalPerPage = 4;
         let currentPage = 1;
@@ -105,7 +104,7 @@
                     window.location.href = `../pages/quiz.html?id=${quizId}`;
                 });
             });
-        }
+        } 
 
         function renderPagination() {
             const totalPage = Math.ceil(filteredQuizzes.length / totalPerPage);
@@ -162,16 +161,24 @@
             renderPagination();
         });
 
-        document.getElementById('sortSelect').addEventListener('change', (e) => {
-            const sortValue = e.target.value;
-            if (sortValue === '1') {
-                filteredQuizzes.sort((a, b) => a.plays - b.plays); // Tăng dần
-            } else if (sortValue === '2') {
-                filteredQuizzes.sort((a, b) => b.plays - a.plays); // Giảm dần
-            }
-            currentPage = 1;
-            renderQuizzes(currentPage);
-            renderPagination();
+        document.getElementById('sortBtn').addEventListener('click', () => {
+        filteredQuizzes = quizzes.slice();
+        filteredQuizzes.sort((a, b) => a.plays - b.plays);
+        currentPage = 1;
+        renderQuizzes(currentPage);
+        renderPagination();
+        document.getElementById('sortBtn').classList.add('active');
+        document.getElementById('sortBtn2').classList.remove('active');
+        });
+
+        document.getElementById('sortBtn2').addEventListener('click', () => {
+        filteredQuizzes = quizzes.slice();
+        filteredQuizzes.sort((a, b) => b.plays - a.plays);
+        currentPage = 1;
+        renderQuizzes(currentPage);
+        renderPagination();
+        document.getElementById('sortBtn2').classList.add('active');
+        document.getElementById('sortBtn').classList.remove('active');
         });
 
         document.getElementById('btnPlay').addEventListener('click', () => {

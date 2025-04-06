@@ -99,6 +99,7 @@
      max-width: 1200px;
      margin: 0 auto;
      padding: 0 30px;
+     gap: 10px;
  }
 
  #btnPlay {
@@ -316,3 +317,37 @@
      text-align: center;
      padding: 12px;
  }
+ .btn {
+     background: #fff;
+     color: #000;
+     border: 1px solid #de2828!important;
+     border-radius: 5px;
+     padding: 8px 12px;
+     font-size: 14px;
+     cursor: pointer;
+     transition: background 0.3s ease;
+ }
+
+ /* .btn:hover {
+     background: #f0f0f0;
+ }
+ .btn.active {
+     background: #ffd700;
+     color: #000;
+     border-color: #ffd700;
+ } */
+ #sort{
+    display: flex;
+    align-items: center;
+        gap: 10px;
+ }
+ /* .sort-container{
+     margin: 0;
+ } */
+#sort p{
+    margin: 0;
+    /* border: 1px solid black; */
+}
+.btn {
+    margin: 0;
+}

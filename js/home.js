@@ -4,7 +4,6 @@ if (localStorage.getItem("isLoggedIn") !== "true" && currentPage !== "login.html
     window.location.href = "../pages/login.html";
 }
 
-// Xử lý đăng xuất
 const logoutLink = document.getElementById("logoutLink");
 if (logoutLink) {
     logoutLink.addEventListener("click", (e) => {

@@ -18,7 +18,7 @@ html {
 }
 
 .input-group-text {
-    background: #8a8282 !important;
+    background: #6a7698 !important;
     /* border: 0 !important; */
 }
 
@@ -26,10 +26,14 @@ html {
     border: none;
     border-radius: 5px;
     padding: 5px;
-    background: #beb6b6 !important;
+    background: #8a96ba !important;
 }
 
 #btnLogIn:hover{
     /* opacity: 0.5; */
-    background: #989191 !important;
+    background: #5B6A99 !important;
+}
+.error-message{
+    display: none;
+    color: red;
 }

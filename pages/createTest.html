@@ -28,24 +28,14 @@
     <main>
         <div id="mainContent">
             <h2>Create the test</h2>
-            <div id="testName" class="mb-3">
+            <div id="testNameContainer" class="mb-3">
                 <label for="testName" class="form-label">Test name</label>
                 <input type="text" id="testName" class="form-control" placeholder="Input test">
             </div>
             <div class="row">
                 <div class="CateSelect">
-                    <label for="category" class="form-label">Category</label>
-                    <select id="category-test" class="form-select">
-                        <!-- <option value="" disabled selected>Select category</option>
-                        <option value="1">📚 History</option>
-                        <option value="2">🧪 Science</option>
-                        <option value="3">🏠 Life</option>
-                        <option value="4">🗺️ Geography</option>
-                        <option value="5">📖 Literature</option>
-                        <option value="6">💻 Programming</option>
-                        <option value="7">🔢 Mathematics</option>
-                        <option value="8">🎨 Art</option> -->
-                    </select>
+                    <label class="form-label">Category</label>
+                    <select id="category-test" class="form-select"></select>
                 </div>
                 <div>
                     <label for="time" class="form-label">Time(minutes)</label>
@@ -78,11 +68,11 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">Add/edit question"</h5>
+                    <h5 class="modal-title" id="modalLabel">Add/edit question</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <label for="question" class="form-label">Question</label>
+                    <label class="form-label">Question</label>
                     <!-- quesssssstion -->
                     <input type="text" id="content-question" class="form-control" placeholder="Input question">
                     <!-- <small id="errorQuestion" class="error-text d-none">Not duoc de trong</small> -->
@@ -107,8 +97,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
-    <script src="../js/createTest2.js"></script>
-    <!-- <script src="../js/createTest.js"></script> -->
+    <script src="../js/createTest.js"></script>
 </body>
 
 </html>

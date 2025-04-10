@@ -1,20 +1,13 @@
 // register.js
-let users = JSON.parse(localStorage.getItem("user")) || [];
-
-// Tạo admin mặc định nếu chưa có
-const defaultAdmin = {
+let users = JSON.parse(localStorage.getItem("user")) || [
+    {
     id: 0,
     fullName: "Admin",
     email: "admin@example.com",
     password: "admin123",
     role: "admin"
-};
-
-if (!users.some(user => user.role === "admin")) {
-    users.push(defaultAdmin);
-    localStorage.setItem("user", JSON.stringify(users));
 }
-
+];
 const registerForm = document.getElementById("registerForm");
 if (registerForm) {
     registerForm.addEventListener("submit", function (e) {
@@ -30,11 +23,10 @@ if (registerForm) {
         const confirmPasswordError = document.getElementById("confirmPasswordError");
 
         if (!username || !email || !password || !confirmPassword) {
-            console.error("One or more form elements are missing!");
             return;
         }
 
-        let isValid = true;
+        let check = true;
         usernameError.style.display = "none";
         emailError.style.display = "none";
         passwordError.style.display = "none";
@@ -42,40 +34,44 @@ if (registerForm) {
 
         if (!username.value.trim()) {
             usernameError.style.display = "block";
-            isValid = false;
+            check = false;
         }
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!email.value.trim() || !emailPattern.test(email.value.trim())) {
+        //Use regex de validate empty, character
+        const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;  
+        if (!email.value.trim() || !regexEmail.test(email.value.trim())) {
             emailError.style.display = "block";
-            isValid = false;
+            check = false;
         }
         if (!password.value.trim() || password.value.trim().length < 8) {
             passwordError.style.display = "block";
-            isValid = false;
+            check = false;
         }
         if (!confirmPassword.value.trim() || confirmPassword.value.trim() !== password.value.trim()) {
             confirmPasswordError.style.display = "block";
-            isValid = false;
+            check = false;
         }
 
-        if (isValid) {
-            const newId = users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1;
+        if (check) {
+
             const newUser = {
-                id: newId,
-                fullName: username.value.trim(),
-                email: email.value.trim(),
-                password: password.value.trim(),
-                role: "user" // Mặc định role là "user"
+                id: users[users.length-1].id+1,
+                fullName: username.value?.trim(),
+                email: email.value?.trim(),
+                password: password.value?.trim(),
+                role: "user" 
             };
+
             users.push(newUser);
             localStorage.setItem("user", JSON.stringify(users));
+
             username.value = "";
             email.value = "";
             password.value = "";
             confirmPassword.value = "";
+
             localStorage.setItem("isLoggedIn", "true");
             localStorage.setItem("currentUser", JSON.stringify(newUser));
-            window.location.href = "../pages/dashboard.html"; // Chuyển hướng đến trang dashboard.html
+            window.location.href = "../pages/dashboard.html";
         }
     });
 }

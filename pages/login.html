@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon_register.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon_register.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon_lognIn.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon_lognIn.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="../css/login.css">
     <title>Log in</title>
@@ -15,7 +15,7 @@
     <div class="container h-100 d-flex align-items-center justify-content-center">
         <div class="card p-4 shadow-lg" style="width: 350px;">
             <div class="text-center">
-                <img src="../assets/register.png" class="mb-2" alt="Logo" width="80" height="70">
+                <img src="../assets/lognIn.png" style="margin: 0; width: 75px; height: 77px;" class="mb-2" alt="Logo" width="80" height="70">
             </div>
             <form id="loginForm" class="mb-2">
                 <div class="mb-3">
@@ -25,7 +25,7 @@
                                 style="color:#f4eeee;"></i></span>
                         <input type="email" id="email1" class="form-control" name="email" placeholder="Enter email">
                     </div>
-                    <span class="error-message" id="emailError">Email is required</span>
+                    <small class="error-message" id="email-error">Email is empty</small>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Password</label>
@@ -34,8 +34,8 @@
                         <input type="password" id="password1" class="form-control" name="password"
                             placeholder="Enter password">
                     </div>
-                    <span class="error-message" id="passwordError">Password is required</span>
-                    <span class="error-message" id="loginError">Invalid email or password</span>
+                    <small class="error-message" id="pass-error">Password is empty</small>
+                    <small class="error-message" id="login-error">Invalid email or password</small>
                 </div>
                 <div class="d-grid">
                     <button type="submit" id="btnLogIn">Log in</button>

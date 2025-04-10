@@ -1,156 +1,251 @@
- document.addEventListener("DOMContentLoaded", function () {
-    let testList = [
-        { id: 1, name: "History", category: "📚 History", questions: 15, time: "10", status: "1" },
-        { id: 2, name: "Programming", category: "💻 Programming", questions: 20, time: "15", status: "2" },
-        { id: 3, name: "Life", category: "🏠 Life", questions: 10, time: "5", status: "1" },
-        { id: 4, name: "Programming", category: "💻 Programming", questions: 10, time: "5", status: "1" },
-        { id: 5, name: "Geography", category: "🗺️ Geography", questions: 10, time: "5", status: "1" },
-        { id: 6, name: "Mathematics", category: "🔢 Mathematics", questions: 10, time: "5", status: "2" },
-        { id: 7, name: "Life", category: "🏠 Life", questions: 10, time: "5", status: "1" },
-        { id: 8, name: "Science", category: "🧪 Science", questions: 10, time: "5", status: "2" },
-    ];
+//Pagination
+        //B1: Tinh tong so page
+        //B2: Tao nut so trang
+        //B3: Tinh toan phan trang
+        //B4: Hthi dlieu
+        //B5: Cap nhat status button Prev/Next
+        //Logic:
+        //Phan trang: Chia key thanh 4 doan ptu, hthi doan tuong ung vs currnetPage
+        //Dieu huong: Cac nut so trang cap nhat currentPage vs lm ms giao dien
+        //Trang thai nut đc add or remove disabled dua tren vtri cua curr...
+        let testList = JSON.parse(localStorage.getItem("arrCategories")) || [];
+        const testListEl = document.getElementById("test-list");
+        const selectOp = document.getElementById("select-op");
+        const inputSearch = document.getElementById("inputSearch");
+        const btnAdd = document.getElementById("btnAdd");
+        const testModal = new bootstrap.Modal(document.getElementById("test-modal"));
+        const testName = document.getElementById("testName");
+        const testCategory = document.getElementById("testCategory");
+        const testQuestions = document.getElementById("testQuestions");
+        const testTime = document.getElementById("testTime");
+        const saveTestBtn = document.getElementById("saveTestBtn");
+        const modalTitle = document.getElementById("testModalLabel");
+        const modalEl = document.getElementById("test-modal");
+        const btnPagesEl = document.querySelector("#btnPages");
+        const btnPrevEl = document.querySelector("#btnPrev");
+        const btnNextEl = document.querySelector("#btnNext");
 
-    const testListEl = document.getElementById("test-list");
-    const btnAdd = document.getElementById("btnAdd");
-    const statusFilter = document.getElementById("statusFilter");
-    const inputSearch = document.getElementById("inputSearch");
-    const testModal = new bootstrap.Modal(document.getElementById("testModal"));
-    const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
-    const modalError = document.getElementById("modal-error");
-    const testNameInput = document.getElementById("testName");
-    const testCategoryInput = document.getElementById("testCategory");
-    const testQuestionsInput = document.getElementById("testQuestions");
-    const testTimeInput = document.getElementById("testTime");
-    const modalTitle = document.getElementById("testModalLabel");
-
-    let editIndex = null;
-    let deleteIndex = null;
-
-    function renderTests() {
-        let filteredTests = testList;
-
-        const status = statusFilter.value;
-        if (status) {
-            filteredTests = filteredTests.filter(test => test.status === status);
+        let modalStatus = {
+            mode: "",
+            id: null
+        }
+        function saveLocal() {
+            localStorage.setItem("testList", JSON.stringify(testList));
         }
 
-        const searchText = inputSearch.value.trim().toLowerCase();
-        if (searchText) {
-            filteredTests = filteredTests.filter(test => test.name.toLowerCase().includes(searchText));
+        //function pagination
+        let currentPage = 1;
+        const totalPerPage = 4;
+        //Tinh tong so trang dua tren do dai testList va totalPage
+        const getTotalPage = () => Math.ceil(testList.length / totalPerPage);
+
+        function renderCategory(el) {
+            const categories = JSON.parse(localStorage.getItem("arrCategories") || "[]");
+            let htmls = '<option value="" disabled selected>Select category</option>';
+            categories.forEach(category => {
+                htmls += `<option value="${category.id}">${category.emoji} ${category.name}</option>`;
+            });
+            el.innerHTML = htmls;
         }
 
-        testListEl.innerHTML = "";
-        filteredTests.forEach(test => {
-            const row = `
-                <tr>
-                    <td>${test.id}</td>
-                    <td>${test.name}</td>
-                    <td>${test.category}</td>
-                    <td>${test.questions}</td>
-                    <td>${test.time} min</td>
-                    <td>
-                        <button class="btn yellow" onclick="openEditModal(${test.id})">Sửa</button>
-                        <button class="btn red" onclick="openDeleteModal(${test.id})">Xóa</button>
-                    </td>
-                </tr>
-            `;
-            testListEl.innerHTML += row;
+function renderTest() {
+            console.log(testList);
+            
+            let searchTest = testList.filter(test =>
+                test.name.toLowerCase().includes(inputSearch.value.toLowerCase().trim())
+            );
+
+            if (selectOp.value === "1") {
+                searchTest.sort((a, b) => a.name.localeCompare(b.name));
+            } else if (selectOp.value === "2") {
+                searchTest.sort((a, b) => a.time - b.time);
+            }
+
+            //tinh toan phan trang dua tren searchTest
+            const totalPage = Math.ceil(searchTest.length / totalPerPage);
+            const start = (currentPage - 1) * totalPerPage;
+            const end = start + totalPerPage;
+            const items = searchTest.slice(start, end);
+            console.log(items);
+            
+
+            testListEl.innerHTML = items.map(test => `
+        <tr>
+            <td>${test.id}</td>
+            <td>${test.name}</td>
+            <td>${test.cate}</td>
+            <td>${test.ques}</td>
+            <td>${test.time} min</td>
+            <td>
+                <button class="btn btn-warning btn-sm" onclick="openEditModal(${test.id})">Edit</button>
+                <button class="btn btn-danger btn-sm" onclick="openDeleteModal(${test.id})">Delete</button>
+            </td>
+        </tr>
+       `).join("");
+
+            //Tao nut phan trang
+            btnPagesEl.innerHTML = "";
+            for (let i = 1; i <= totalPage; i++) {
+                const btnEl = document.createElement("button");
+                btnEl.textContent = i;
+                if (currentPage === i) btnEl.classList.add("btn-active");
+                btnEl.addEventListener("click", function () {
+                    currentPage = i;
+                    renderTest();
+                    renderPagination();
+                });
+                btnPagesEl.appendChild(btnEl);
+            }
+        }
+        //function update status button
+        function renderPagination() {
+            const totalPage = Math.ceil(testList.length / totalPerPage);
+            btnPrevEl.disabled = currentPage === 1;
+            btnNextEl.disabled = currentPage === totalPage;
+        }
+        //lang nghe skien cho Prev/Next
+        btnPrevEl.addEventListener("click", function () {
+            if (currentPage > 1) {
+                currentPage--;
+                renderTest();
+                renderPagination();
+            }
         });
-    }
+        btnNextEl.addEventListener("click", function () {
+            if (currentPage < getTotalPage()) {
+                currentPage++;
+                renderTest();
+                renderPagination();
+            }
+        });
+        btnAdd.addEventListener("click", () => {
+            renderCategory(testCategory);
+            modalTitle.textContent = "Add Test";
+            testName.value = "";
+            testCategory.value = "";
+            testQuestions.value = "";
+            testTime.value = "";
+            saveTestBtn.textContent = "Add";
+            modalStatus = {
+                mode: "add",
+                id: null
+            }
+            testModal.show();
+        })
 
-    function validateTest(name, category, questions, time) {
-        if (!name || name.length === null || name.length > 50) {
-            return "Test name cannot be longer than 50 characters";
+        function openEditModal(id) {
+            renderCategory(testCategory);
+            modalTitle.textContent = "Edit Test";
+            const test = testList.find(test => test.id === id);
+            if (test) {
+                testName.value = test.name;
+                testCategory.value = test.cate;
+                testQuestions.value = test.ques;
+                testTime.value = test.time;
+                saveTestBtn.textContent = "Save";
+                modalStatus = {
+                    mode: "edit",
+                    id
+                }
+            }
+            testModal.show();
         }
-        //find(element)==some(boolean)
-        if (testList.some((test, idx) => test.name === name && idx !== editIndex)) {
-            return "Test name exist.";
-        }
-        if (!category) {
-            return "Empty category.";
-        }
-        // if (!questions || questions < 1) {
-        //     return "Question number must be greater than 0.";
-        // }
-        // if (!time || time < 1) {
-        //     return "Time must be greater than 0.";
-        // }
-        return "";
-    }
+        saveTestBtn.addEventListener("click", () => {
+            let check = true;
+            const name = testName.value?.trim();
+            const cate = testCategory.value;
+            const ques = testQuestions.value;
+            const time = testTime.value;
+            if (!name) {
+                document.getElementById("name-error").style.display = "block";
+                check = false;
+            } else {
+                document.getElementById("name-error").style.display = "none";
+            }
 
-    btnAdd.addEventListener("click", () => {
-        editIndex = null;
-        modalTitle.textContent = "Thêm bài test";
-        testNameInput.value = "";
-        testCategoryInput.value = "";
-        testQuestionsInput.value = "";
-        testTimeInput.value = "";
-        modalError.style.display = "none";
-        testModal.show();
-    });
+            if (!cate) {
+                document.getElementById("cate-error").style.display = "block";
+                check = false;
+            } else {
+                document.getElementById("cate-error").style.display = "none";
+            }
 
-    window.openEditModal = function (id) {
-        editIndex = testList.findIndex(test => test.id === id);
-        const test = testList[editIndex];
-        modalTitle.textContent = "Sửa bài test";
-        testNameInput.value = test.name;
-        testCategoryInput.value = test.category;
-        testQuestionsInput.value = test.questions;
-        testTimeInput.value = test.time;
-        modalError.style.display = "none";
-        testModal.show();
-    };
+            if (!ques || +ques < 1) {
+                document.getElementById("ques-error").style.display = "block";
+                check = false;
+            } else {
+                document.getElementById("ques-error").style.display = "none";
+            }
 
-    window.saveTest = function () {
-        const name = testNameInput.value.trim();
-        const category = testCategoryInput.value;
-        const questions = parseInt(testQuestionsInput.value);
-        const time = parseInt(testTimeInput.value);
+            if (!time || +time < 1) {
+                document.getElementById("time-error").style.display = "block";
+                check = false;
+            } else {
+                document.getElementById("time-error").style.display = "none";
+            }
 
-        const error = validateTest(name, category, questions, time);
-        if (error) {
-            modalError.textContent = error;
-            modalError.style.display = "block";
-            return;
-        }
+            if (check) {
+                const {
+                    mode,
+                    id
+                }=modalStatus
+                
+                if (mode === "add") {
+                    const newTest = {
+                        id: testList.length > 0 ? testList[testList.length - 1].id + 1 : 1,
+                        name,
+                        cate,
+                        ques: +ques,
+                        time: +time
+                    };
+                    testList.push(newTest);
+                } else if (mode === "edit" && id !== null) {
+                    const index = testList.findIndex(test => test.id === id);
+                    if (index !== -1) {
+                        testList[index] = {
+                            id: testList[index].id,
+                            name,
+                            cate,
+                            ques: +ques,
+                            time: +time
+                        };
+                    }
+                }
 
-        if (editIndex === null) {
-            const newTest = {
-                id: testList.length > 0 ? testList[testList.length - 1].id + 1 : 1,
-                name,
-                category,
-                questions,
-                time
+                saveLocal()
+                testModal.hide()
+                currentPage = 1
+                renderTest()
+                renderPagination()
+            }
+        })
+
+        function openDeleteModal(id) {
+            const deleteModal = new bootstrap.Modal(document.getElementById("delete-modal"));
+            deleteModal.show();
+            document.getElementById("confirmDeleteBtn").onclick = () => {
+                const index = testList.findIndex(test => test.id === id);
+                if (index !== -1) {
+                    testList.splice(index, 1)
+                    saveLocal()
+                    deleteModal.hide()
+                    currentPage = 1
+                    renderTest()
+                    renderPagination()
+                }
             };
-            testList.push(newTest);
-        } else {
-            testList[editIndex] = {
-                id: testList[editIndex].id,
-                name,
-                category,
-                questions,
-                time
-            };
         }
 
-        testModal.hide();
-        renderTests();
-    };
-
-    window.openDeleteModal = function (id) {
-        deleteIndex = testList.findIndex(test => test.id === id);
-        deleteModal.show();
-    };
-
-    window.confirmDelete = function () {
-        testList.splice(deleteIndex, 1);
-        deleteModal.hide();
-        renderTests();
-    };
-
-    statusFilter.addEventListener("change", renderTests);
-
-    inputSearch.addEventListener("input", renderTests);
-
-    renderTests();
-});
+        inputSearch.addEventListener("input", renderTest)
+        selectOp.addEventListener("change", renderTest)
+        const logoutLink = document.getElementById("logoutLink");
+        if (logoutLink) {
+            logoutLink.addEventListener("click", (e) => {
+                e.preventDefault();
+                localStorage.removeItem("isLoggedIn");
+                localStorage.removeItem("currentUser");
+                window.location.href = "../pages/login.html";
+            });
+        }
+        renderTest()
+        renderPagination()

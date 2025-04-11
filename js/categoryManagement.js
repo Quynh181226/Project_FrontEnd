@@ -12,19 +12,21 @@ const arrCategories = JSON.parse(localStorage.getItem("arrCategories")) || [
     { id: "11", name: "Art", emoji: "🎨" }
 ];
 
-const categoryList = document.getElementById("categoryList");
-const pagination = document.getElementById("pagination");
-const btnSaveItem = document.getElementById("btn-save");
-const btnConfirmDelete = document.getElementById("btnConfirmDelete");
-const logoutLink = document.querySelector('a[href="../pages/login.html"]');
+const categoryList = document.getElementById("categoryList")
+const pagination = document.getElementById("pagination")
+const btnSaveItem = document.getElementById("btn-save")
+const btnConfirmDelete = document.getElementById("btnConfirmDelete")
+const logOut = document.querySelector('#log-inn')
+const testManagement=document.querySelector("#test-management")
+const categoryManagement=document.querySelector("#category-management")
 
-const cateName = document.getElementById("cateName");
-const cateEmoji = document.getElementById("cateEmoji");
-const errName = document.getElementById("errName");
-const errEmoji = document.getElementById("errEmoji");
+const cateName = document.getElementById("cateName")
+const cateEmoji = document.getElementById("cateEmoji")
+const errName = document.getElementById("errName")
+const errEmoji = document.getElementById("errEmoji")
 
-let currentPage = 1;
-const totalPerpage = 4;
+let currentPage = 1
+const totalPerpage = 4
 
 const getTotalPage = () => Math.ceil(arrCategories.length / totalPerpage);
 
@@ -54,8 +56,9 @@ function renderPages() {
     pagination.innerHTML = "";
 
     const btnPrev = document.createElement("button")
-    btnPrev.textContent = "Prev"
+    // btnPrev.style...///////????????????????????????????????????:))Why tai sao ko dc
     btnPrev.id = "btnPrev"
+    btnPrev.innerHTML = '<i class="fa fa-chevron-left"></i>';
     btnPrev.disabled = currentPage === 1;
     btnPrev.addEventListener("click", function () {
         if (currentPage > 1) {
@@ -79,8 +82,11 @@ function renderPages() {
     }
 
     const btnNext = document.createElement("button")
-    btnNext.textContent = "Next";
+    // btnNext.textContent = "Next";
+    // btnNext.style.color = "black";
+
     btnNext.id = "btnNext";
+     btnNext.innerHTML = '<i class="fa fa-chevron-right"></i>';
     btnNext.disabled = currentPage === total;
     btnNext.addEventListener("click", function () {
         if (currentPage < getTotalPage()) {
@@ -148,14 +154,14 @@ function openAddEditModal(index, mode) {
                     name,
                     emoji
                 };
-                console.log("edit thanh cong..............");
+                // console.log("edit thanh cong..............");
             } else {
                 arrCategories.push({
                     id: (arrCategories.length + 1).toString(),
                     name,
                     emoji
                 });
-                console.log("addddddddd cate"); 
+                // console.log("addddddddd cate"); 
             }
             localStorage.setItem("arrCategories", JSON.stringify(arrCategories));
             renderPages();
@@ -175,15 +181,26 @@ function openDeleteModal(index) {
         if (currentPage > total && total > 0) {
             currentPage = total
         }
-        console.log("delete succcceeeesss"); 
+        // console.log("delete succcceeeesss"); 
         renderPages()
         modal.hide()
     };
 }
 
-logoutLink.addEventListener("click", (e) => {
-    localStorage.removeItem("isLoggedIn")
+logOut.addEventListener("click", (e) => {
+        // e.preventDefault()
+        localStorage.removeItem("isLoggedIn")
+        localStorage.removeItem("currentUser")
     window.location.href = "../pages/login.html"
 });
 
-renderPages();
+testManagement.addEventListener("click", (e) => {
+    // localStorage.getItem("isLoggeIn")
+    window.location.href="../pages/testManagement1.html"
+})
+
+categoryManagement.addEventListener("click", (e) => {
+    // localStorage.getItem("isLoggeIn")
+    window.location.href="../pages/categoryManagement.html"
+})
+renderPages()

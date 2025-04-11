@@ -6,7 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>QuizzForge</title>
     <link rel="stylesheet" href="../css/test.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/test.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/test.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
@@ -26,40 +29,62 @@
                     <li><a href="../pages/login.html" id="logoutLink">Log out</a></li>
                 </ul>
             </nav>
+            <div class="nav-bar">
+                <img src="../assets/navBar.png">
+            </div>
         </div>
     </header>
 
     <div class="container">
-        <aside class="sidebar">
-            <h3>Điều hướng nhanh</h3>
-            <div class="quick-navigation" id="pagination"></div>
-            <p class="note">Lưu ý: Bấm để chọn câu hỏi hoặc sử dụng điều hướng.</p>
-        </aside>
-
-        <main class="quiz-container">
-            <h2>Khoa học máy tính</h2>
-            <p class="question-number">Câu hỏi <span id="question-index">1</span> trên 20:</p>
-            <p id="question-text"></p>
-            <div id="answers"></div>
-
-            <div class="buttons">
-                <div>
-                    <button type="button" class="btn btn-secondary" id="prev-btn">Previous</button>
-                    <button type="button" class="btn btn-primary" id="next-btn">Next</button>
+            <aside class="sidebar">
+                <h4>Quick navigation</h4>
+                <div class="quickNav" id="quick-nav">
+                    <div>1</div>
+                    <div>2</div>
+                    <div>3</div>
+                    <div>4</div>
+                    <div>5</div>
+                    <div>6</div>
+                    <div>7</div>
+                    <div>8</div>
+                    <div>9</div>
+                    <div>10</div>
+                    <div>11</div>
+                    <div>12</div>
+                    <div>13</div>
+                    <div>14</div>
+                    <div>15</div>
+                    <div>16</div>
+                    <div>17</div>
+                    <div>18</div>
+                    <div>19</div>
+                    <div>20</div>
                 </div>
-                <div>
-                    <button type="button" class="btn btn-success" id="complete-btn">Completed</button>
+                <p class="note"><strong>Note: </strong>Here is a list of articles you can use to navigate.</p>
+            </aside>
+            <main class="quiz-container">
+                <h2>Computer Science</h2>
+                <p class="question-number">Question <span id="question-index">1</span> above 20:</p>
+                <p id="question-text"></p>
+                <div id="answers"></div>
+            
+                <div class="buttons">
+                    <div id="btnStep">
+                        <button type="button" class="btn btn-secondary" id="prev-btn">Previous</button>
+                        <button type="button" class="btn btn-primary" id="next-btn">Next</button>
+                    </div>
+                    <div id="btnComp">
+                        <button type="button" class="btn btn-success" id="complete-btn">Completed</button>
+                    </div>
                 </div>
-            </div>
-        </main>
+            </main>
     </div>
 
     <!-- Footer -->
     <footer class="footer">
-        <p>&copy; 2025 QuizzyForge. All rights reserved.</p>
+        <p>© 2025 QuizzyForge. All rights reserved.</p>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/test.js"></script>
 </body>
 
 </html>

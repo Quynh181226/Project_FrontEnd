@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/testManagement.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/testManagement.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/testManagement.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <title>Test management</title>
@@ -16,9 +18,9 @@
         <div class="header-content">
             <h2>QuizzForge</h2>
             <nav>
-                <a href="#">Category</a>
-                <a href="#" class="active">The test</a>
-                <a href="#" id="logoutLink">Log out</a>
+                <a href="#" id="category">Category</a>
+                <a href="#" id="the-test" class="active">The test</a>
+                <a href="#" id="log-in1">Log out</a>
             </nav>
         </div>
     </header>
@@ -57,13 +59,14 @@
             </table>
         </div>
     </main>
+
     <!-- Pagination -->
-    <!-- <div class="pagination" id="pagination"></div> -->
-    <div class="btn1" id="btn-active">
-        <button id="btnPrev"><img src="../assets/next.png"></button>
-        <div id="btnPages"></div>
-        <button id="btnNext"><img src="../assets/previous.png"></button>
+    <div class="pagination">
+        <button id="btnPrev" class="pagination-btn" style="color: black;"><i class="fa fa-chevron-left"></i></button>
+        <div id="btnPages" class="pagination-pages"></div>
+        <button id="btnNext" class="pagination-btn" style="color: black;"><i class="fa fa-chevron-right"></i></button>
     </div>
+
     <!-- Footer -->
     <footer>
         <p>© 2025 QuizzForge. All rights reserved.</p>

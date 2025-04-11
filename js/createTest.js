@@ -1,3 +1,19 @@
+// const category11 = document.querySelector("#category1")
+// const theTest = document.querySelector("#the-test1")
+// const logOut1=document.querySelector("#log-out1")
+
+// category11.addEventListener("click", (e) => {
+//     window.location("../pages/categoryManagement.html")
+// })
+
+// theTest.addEventListener("click", (e) => {
+//     window.location("../pages/testManagement1.html")
+// })
+
+// logOut1.addEventListener("click", (e) => {
+//     localStorage.removeItem("isLoggedIn")
+//     window.location("../pages/login.html")
+// })
 //function category 
 function renderCategory() {
     //lay gtri tren local
@@ -143,11 +159,12 @@ function renderTestListQuestion() {
             renderTestListQuestion()
         })
     })
-
-  const btnEditQuestion = document.querySelectorAll('.btn-edit-question');
+//function editQues
+const btnEditQuestion = document.querySelectorAll('.btn-edit-question');
     btnEditQuestion.forEach((btnEdit, i) => {
         btnEdit.addEventListener("click", (e) => {
             // Copy ques and ans
+            //1. 
             question = {
                 content: questionList[i].content,
                 answers: []

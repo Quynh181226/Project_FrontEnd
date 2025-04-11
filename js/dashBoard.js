@@ -50,7 +50,7 @@ function renderPagination(quizData) {
 
     const btnPrev = document.createElement('button')
     btnPrev.id = 'btnPrev';
-    btnPrev.textContent = 'Previous';
+    btnPrev.innerHTML = '<i class="fa fa-chevron-left"></i>';
     btnPrev.disabled = currentPage === 1;
     btnPrev.onclick = function() {
         if (currentPage > 1) {
@@ -75,7 +75,7 @@ function renderPagination(quizData) {
 
     const btnNext = document.createElement('button');
     btnNext.id = 'btnNext';
-    btnNext.textContent = 'Next';
+    btnNext.innerHTML = '<i class="fa fa-chevron-right"></i>';
     btnNext.disabled = currentPage === totalPage;
     btnNext.onclick = function() {
         if (currentPage < totalPage) {

@@ -210,122 +210,79 @@
      background: #e6c200;
  }
 
- @media (max-width: 1024px) {
-     .quizzList {
-         grid-template-columns: repeat(2, 1fr);
-     }
- }
-
- @media (max-width: 768px) {
-     .quizzList {
-         grid-template-columns: 1fr;
-     }
-
-     .sort-container {
-         display: flex;
-         margin-left: 46px;
-     }
-
-     .quizzContent {
-         width: 100%;
-     }
-
-     .quizzItem {
-         width: 86%;
-         margin: 0 auto;
-     }
-
-     /* .quizzInfo{
-                display: flex;
-                flex-direction: row;
-                font-size: 10px;
-            } đang cần sửa lại chỗ khi mà màn như thế này thì chữ sẽ thu nhỏ lại và hàng ngang như bthv*/
-     .pagination {
-         display: flex;
-         flex-wrap: wrap;
-         justify-content: center;
-     }
- }
-
- @media (max-width: 480px) {
-     .quizzList {
-         grid-template-columns: 1fr;
-     }
-
-     .quizzContent {
-         width: 100%;
-     }
-
-     .header-container {
-         flex-direction: column;
-         height: auto;
-         padding: 10px;
-     }
-
-     .searchBar {
-         width: 100%;
-         margin: 10px 0;
-     }
-
-     #inputSearch {
-         width: 100%;
-     }
-
-     .navMenu ul {
-         flex-direction: column;
-         align-items: center;
-     }
- }
-
  .pagination {
      display: flex;
      justify-content: center;
-     gap: 10px;
      margin: 30px 0;
  }
 
  .pagination button {
-     padding: 8px 12px;
-     font-size: 14px;
+    font-weight: 533;
+     width: 40px;
+     height: 40px;
      border: 1px solid #ddd;
-     border-radius: 5px;
      background: #fff;
+     color: #0D6EFD;
+     font-size: 16px;
      cursor: pointer;
-     transition: background 0.3s ease;
+     padding: 0;
  }
 
- .pagination button:hover {
-     background: #f0f0f0;
+ .pagination button:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-left: 1px solid #ddd;
+    color: black;
+ }
+
+ .pagination button:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-right: 1px solid #ddd;
+    color: black;
+ }
+
+ .pagination .btnPage {
+    border: 1px solid #ddd;
+ }
+
+ .pagination .btnPage:last-child {
+    border-right: none;
  }
 
  .pagination button.active {
-     background: #685d6c;
-     color: #000;
-     border-color: #685d6c;
+    background: #007BFF;
+    color: #fff;
+    /* border-color: #007BFF; */
+    
+ }
+
+ .pagination button:hover {
+    background: #e7ecf1;
+    border: none;
  }
 
  .pagination button:disabled {
-     background: #f0f0f0;
-     color: #999;
-     cursor: not-allowed;
+    color: #999;
+    cursor: not-allowed;
  }
 
  footer {
-     width: 100%;
-     background: #2b2b2b;
-     color: #fff;
-     text-align: center;
-     padding: 12px;
+    width: 100%;
+    background: #2b2b2b;
+    color: #fff;
+    text-align: center;
+    padding: 12px;
  }
  .btn {
-     background: #fff;
-     color: #000;
-     border: 1px solid #de2828!important;
-     border-radius: 5px;
-     padding: 8px 12px;
-     font-size: 14px;
-     cursor: pointer;
-     transition: background 0.3s ease;
+    background: #fff;
+    color: #000;
+    border: 1px solid #de2828!important;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease;
  }
 
  /* .btn:hover {
@@ -350,4 +307,125 @@
 }
 .btn {
     margin: 0;
+}
+@media (max-width: 1024px) {
+    .quizzList {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 815px) and (min-width: 769px) {
+    .quizzList {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 0 20px;
+    }
+
+    .quizzItem {
+        height: 140px;
+    }
+
+    .quizzContent {
+        width: 100%;
+    }
+
+    .quizzImg {
+        width: 100px;
+        height: 100px;
+        margin-left: 10px;
+        margin-top: 14px;
+    }
+
+    .quizzInfo {
+        padding: 10px;
+    }
+
+    .quizzInfo p:first-child {
+        font-size: 12px;
+    }
+
+    .quizzInfo strong {
+        font-size: 14px;
+    }
+
+    .quizzInfo p:last-child {
+        font-size: 12px;
+    }
+
+    .quizzBtn button {
+        margin-top: 78px;
+        margin-left: 34px;
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .sort-container {
+        padding: 0 20px;
+    }
+
+    .pagination {
+        margin: 20px 0;
+    }
+
+    .pagination button {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    .quizzList {
+        grid-template-columns: 1fr;
+    }
+
+    .sort-container {
+        display: flex;
+        margin-left: 46px;
+    }
+
+    .quizzContent {
+        width: 100%;
+    }
+
+    .quizzItem {
+        width: 86%;
+        margin: 0 auto;
+    }
+
+    .pagination {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .quizzList {
+        grid-template-columns: 1fr;
+    }
+
+    .quizzContent {
+        width: 100%;
+    }
+
+    .header-container {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    .searchBar {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    #inputSearch {
+        width: 100%;
+    }
+
+    .navMenu ul {
+        flex-direction: column;
+        align-items: center;
+    }
 }

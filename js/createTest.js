@@ -42,7 +42,7 @@ const test = testEdit || {
     playAmount: 0,
     questions:[]
 }
-//If co the test need edit => update interface
+//if co the test need edit => update interface
 if (testEdit) {
     //Change title to Create => Edit
     document.querySelector('h2').textContent = 'Edit the test';

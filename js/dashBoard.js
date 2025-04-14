@@ -36,25 +36,25 @@ function cateById(cateId) {
 //function sort
 function applySort(data) {
     if (sortOrder === "ascending") {
-        return [...data].sort((a, b) => a.plays - b.plays);
+        data.sort((a, b) => a.plays - b.plays)
     } else if (sortOrder === "descending") {
-        return [...data].sort((a, b) => b.plays - a.plays);
+        data.sort((a, b) => b.plays - a.plays)
     }
-    return data;
+    return data
 }
 
 function renderQuizzes(page, data) {
-    const quizData = applySort(data || quizzes);
-    const start = (page - 1) * totalPerPage;
-    const end = start + totalPerPage;
-    const quizze = quizData.slice(start, end);
+    const quizData = applySort(data || quizzes)
+    const start = (page - 1) * totalPerPage
+    const end = start + totalPerPage
+    const quizze = quizData.slice(start, end)
 
-    const quizzList = document.getElementById('quizzList');
+    const quizzList = document.getElementById('quizzList')
     quizzList.innerHTML = '';
 
     quizze.forEach(quiz => {
-        const quizzItem = document.createElement('div');
-        quizzItem.className = 'quizzItem';
+        const quizzItem = document.createElement('div')
+        quizzItem.className = 'quizzItem'
         quizzItem.innerHTML = `
             <div class="quizzContent">
                 <div class="quizzImg">
@@ -70,10 +70,10 @@ function renderQuizzes(page, data) {
                 </div>
             </div>
         `;
-        quizzList.appendChild(quizzItem);
+        quizzList.appendChild(quizzItem)
     });
 
-    renderPagination(quizData);
+    renderPagination(quizData)
 }
 
 function renderPagination(data) {
@@ -83,7 +83,7 @@ function renderPagination(data) {
     const btnPrevEl = document.querySelector("#btnPrev")
     const btnNextEl = document.querySelector("#btnNext")
 
-    btnPagesEl.innerHTML = "";
+    btnPagesEl.innerHTML = ""
     for (let i = 1; i <= totalPage; i++) {
         const btnEl = document.createElement("button");
         btnEl.textContent = i;
@@ -125,20 +125,20 @@ document.getElementById('inputSearch').addEventListener("input", function(e) {
 });
 
 document.getElementById('sortBtn').onclick = function() {
-    sortOrder = "ascending";
-    currentPage = 1;
-    renderQuizzes(currentPage);
-    document.getElementById('sortBtn').classList.add('active');
-    document.getElementById('sortBtn2').classList.remove('active');
+    sortOrder = "ascending"
+    currentPage = 1
+    renderQuizzes(currentPage)
+    document.getElementById('sortBtn').classList.add('active')
+    document.getElementById('sortBtn2').classList.remove('active')
 };
 
 document.getElementById('sortBtn2').onclick = function() {
-    sortOrder = "descending";
-    currentPage = 1;
-    renderQuizzes(currentPage);
-    document.getElementById('sortBtn2').classList.add('active');
-    document.getElementById('sortBtn').classList.remove('active');
+    sortOrder = "descending"
+    currentPage = 1
+    renderQuizzes(currentPage)
+    document.getElementById('sortBtn2').classList.add('active')
+    document.getElementById('sortBtn').classList.remove('active')
 };
 
-renderQuizzes(currentPage);
-renderPagination();
+renderQuizzes(currentPage)
+renderPagination()

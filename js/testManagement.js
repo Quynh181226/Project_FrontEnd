@@ -1,4 +1,4 @@
-//Pagination
+  //Pagination
 //B1: Tinh tong so page
 //B2: Tao nut so trang
 //B3: Tinh toan phan trang
@@ -59,8 +59,6 @@ function renderCategory(el) {
 }
 
 //function tim danh muc theo id
-//tại sao lại khai báo bài category và ies ý nghĩa là gì ??
-//tại sao lại phải . toString ....
 function cateById(cateId) {
     const categories = JSON.parse(localStorage.getItem("arrCategories")) || [];
     const category = categories.find(item => item.id === cateId.toString());
@@ -151,8 +149,14 @@ btnNextEl.addEventListener("click", function () {
         renderPagination()
     }
 });
-
+// function resetVali() {
+//     document.getElementById("name-error").style.display = "none";
+//     document.getElementById("cate-error").style.display = "none";
+//     document.getElementById("ques-error").style.display = "none";
+//     document.getElementById("time-error").style.display = "none";
+// }
 btnAdd.addEventListener("click", () => {
+    // resetVali()
     renderCategory(testCategory)
     modalTitle.textContent = "Add Test"
     testName.value = ""
@@ -168,6 +172,7 @@ btnAdd.addEventListener("click", () => {
 });
 
 function openEditModal(id) {
+    // resetVali()
     renderCategory(testCategory);
     modalTitle.textContent = "Edit Test";
     const test = testList.find(test => test.id === id)
@@ -182,7 +187,7 @@ function openEditModal(id) {
             id
         };
     }
-    testModal.show();
+    testModal.show()
 }
 
 saveTestBtn.addEventListener("click", () => {

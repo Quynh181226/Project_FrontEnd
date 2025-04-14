@@ -1,3 +1,4 @@
+//B1: Dlieu gia lap - Cate
 const arrCategories = JSON.parse(localStorage.getItem("arrCategories")) || [
             { id: "1", name: "History", emoji: "📜" },
             { id: "2", name: "Game", emoji: "🎮" },
@@ -11,7 +12,7 @@ const arrCategories = JSON.parse(localStorage.getItem("arrCategories")) || [
             { id: "10", name: "Mathematics", emoji: "🔢" },
             { id: "11", name: "Art", emoji: "🎨" }
 ];
-
+//B2: Lay cac ptu HTML can thao tac
         const categoryList = document.getElementById("categoryList")
         const btnSaveItem = document.getElementById("btn-save")
         const btnConfirmDelete = document.getElementById("btnConfirmDelete")
@@ -23,17 +24,30 @@ const arrCategories = JSON.parse(localStorage.getItem("arrCategories")) || [
         const cateEmoji = document.getElementById("cateEmoji")
         const errName = document.getElementById("errName")
         const errEmoji = document.getElementById("errEmoji")
-
+//B3: Khoi tao cac bien cho phan trang
+//sai vi trang htai thi ko dc dung const vi chung se bi gan lai va thay doi
         let currentPage = 1
+//so ban ghi tren 1 trang
         const totalPerpage = 4
-
+//hien thi ra danh sach trang (button)
+//tinh tong so trang
+//tong so trang = totalRecord/totalPerpage= 11 cate/4 = 3 page    
         const getTotalPage = () => Math.ceil(arrCategories.length / totalPerpage);
-        
+//B4: function hthi dlieu trg bang
         function renderData() {
-            const start = (currentPage - 1) * totalPerpage;
-            const end = start + totalPerpage;
-            const result = arrCategories.slice(start, end);
-            categoryList.innerHTML = "";
+//B5.3: Tinh vtri bdau va kthuc cua dlieu trg trang htai
+            //Vtri bdau trg tung trang
+            //(Trang htai - 1)*So ban ghi/trang
+            const start = (currentPage - 1) * totalPerpage
+            //vtri kthuc ko vuot qua do dai mang
+            const end = start + totalPerpage
+            const result = arrCategories.slice(start, end)
+            // console.log("result:", result);
+            //clear ndung cu trg tbody
+            categoryList.innerHTML = ""
+            //hien thi table
+            //chuyen dlieu thanh HTML (tao cac hang <tr> cho bang)
+            //data nay la bien gia dinh
             let arrData = result.map((item, index) => {
                 const currentIndex = start + index;
                 return `
@@ -47,44 +61,70 @@ const arrCategories = JSON.parse(localStorage.getItem("arrCategories")) || [
         </tr>
        `;
             });
-            categoryList.innerHTML = arrData.join("");
+            //noi cac hang thanh bang va them vao chuoi
+            categoryList.innerHTML = arrData.join("")
         }
-
+//B5: function hthi nut phan trang va cap nhat dlieu
         function renderPagination() {
-            const totalPage = getTotalPage();
-            const btnPagesEl = document.querySelector("#btnPages");
-            const btnPrevEl = document.querySelector("#btnPrev");
-            const btnNextEl = document.querySelector("#btnNext");
-
+            //cap nhat tong so trang vi arr... co the thay doi sau khi add
+            const totalPage = getTotalPage()
+            const btnPagesEl = document.querySelector("#btnPages")
+            const btnPrevEl = document.querySelector("#btnPrev")
+            const btnNextEl = document.querySelector("#btnNext")
+//B5.1: Clear, lm rong kqua trc day di - xoa cac nut trang cu
             btnPagesEl.innerHTML = "";
+//B5.2: Tao nut cho tung trang
             for (let i = 1; i <= totalPage; i++) {
-                const btnEl = document.createElement("button");
+                const btnEl = document.createElement("button")
+//gan tieu de cho button - so trang cho nut
                 btnEl.textContent = i
+                //active cho button dc chon (trang htai)
+                //neu la trang htai add class btn-active de lm noi bat
                 if (currentPage === i) btnEl.classList.add("btn-active");
+                //lang nghe skien khi click vao tung button
+                //gan skien click cho tung nut trang
                 btnEl.addEventListener("click", function () {
+                    //cap nhat trang htai
+                    //gan lai trang htai la gtri ma nut bam vao
                     currentPage = i
+                    //B5.4: Hthi dlieu trg bang
                     renderData()
+                    //goi lai de cap nhat giao dien
                     renderPagination()
                 });
+                //them nut vao container
                 btnPagesEl.appendChild(btnEl)
             }
-
+//B5.5: Vo hieu hoa nut prev, next neu o trang dau cuoi
+            //disable di cac button prev, next khi dk ko tman
             btnPrevEl.disabled = currentPage === 1
             btnNextEl.disabled = currentPage === totalPage
             // console.log("currentPage:", currentPage, "totalPage:", getTotalPage())
         }
-
+//B7: Gan skien click cho nut prev
         document.querySelector("#btnPrev").addEventListener("click", function () {
+             //Giam trang htai di 1
+            //dkien de giam: trang htai > 1
+            //chi giam neu ko o trang dau
             if (currentPage > 1) {
                 currentPage--
                 renderData()
                 renderPagination()
             }
         });
-
+//B6: Gan skien click cho nut next
+        //Lang nghe skien khi click vao thi chuyen trang
+        //De chuyen trang dc ta phai tao 1 cai bien luu tru
+        //xem hien tai dang o trang nao thi ms chuyen dc
         document.querySelector("#btnNext").addEventListener("click", function () {
+            // const totalPage = getTotalPage();
+            //tang trang htai len 1
+            //dk de tiep tuc tang: trang htai phải nhỏ hơn tổng số trang
+            //chi tang neu chua o trang cuoi
             if (currentPage < getTotalPage()) {
+                //sau do ms tang trang htai len 1 dvi
                 currentPage++
+                //cap nhat giao dien
                 renderData()
                 renderPagination()
             }
@@ -98,6 +138,14 @@ const arrCategories = JSON.parse(localStorage.getItem("arrCategories")) || [
             }
             return false
         }
+//logic cua phan add/edit+validate: 
+//1.if/else: de mode status
+//if: mode=edit=>display value+index
+//else: mode=add=>empty
+//2.show modal
+//3.call fun vali
+//=> if is index of value or cate j day 
+//=> local=>arr=>index....
 
         function validateCate(name, emoji, editIndex) {
             errName.classList.add("d-none")
@@ -134,14 +182,6 @@ const arrCategories = JSON.parse(localStorage.getItem("arrCategories")) || [
                 cateName.value = cat.name
                 cateEmoji.value = cat.emoji
             } else {
-                // let Id = +localStorage.getItem("arrCategoryId") || 0;
-                // Id++;
-                // arrCategories.push({
-                //     id: Id.toString(),
-                //     emoji
-                // });
-            
-                // localStorage.setItem("arrCategoryId", Id.toString());
                 cateName.value = ""
                 cateEmoji.value = ""
             }
@@ -160,20 +200,16 @@ const arrCategories = JSON.parse(localStorage.getItem("arrCategories")) || [
                         };
                         // console.log("edit thanh cong..............");
                     } else {
-                        let Id = +localStorage.getItem("arrCategoryId") || arrCategories.length;
-                    Id++;
-                    arrCategories.push({
-                        id: Id.toString(),
-                        name,
-                        emoji
-                    });
-                    localStorage.setItem("arrCategoryId", Id.toString());
+                        // let Id = +localStorage.getItem("arrCategoryId") || arrCategories.length;
+                        // Id++;
+                        arrCategories.push({
+                            // id: Id.toString(),
+                            id: (arrCategories.length + 1).toString(),
+                            name,
+                            emoji
+                        });
+                        // localStorage.setItem("arrCategoryId", Id.toString());
 
-                        // arrCategories.push({
-                        //     id: (arrCategories.length + 1).toString(),
-                        //     name,
-                        //     emoji
-                        // });
                         // console.log("addddddddd cate"); 
                     }
                     localStorage.setItem("arrCategories", JSON.stringify(arrCategories));
@@ -200,6 +236,7 @@ const arrCategories = JSON.parse(localStorage.getItem("arrCategories")) || [
                 // console.log(arrCategories)
                 const total = getTotalPage();
                 if (arrCategories.length === 0) {
+                //dat lai currentPage ve 1 de hthi tu dau or mdinh khi length=0.... curr...=page"1"
                     currentPage = 1;
                 } else if (currentPage > total) {
                     currentPage = total;

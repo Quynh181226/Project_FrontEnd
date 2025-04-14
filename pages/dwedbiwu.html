@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="../css/dashBoard.css"> -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/home.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/home.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <title>Home</title>
+    <style>
+         * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+
+ html,
+ body {
+     margin: 0;
+     padding: 0;
+     height: 100%;
+     font-family: Arial, sans-serif;
+ }
+
+ body {
+     padding-bottom: 60px;
+ }
+
+ .header-container {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 15px 30px;
+     background: #2b2b2b;
+     height: 60px;
+ }
+
+ .textLogo {
+     display: flex;
+     align-items: center;
+     gap: 8px;
+ }
+
+ .textLogo h3 {
+     color: #fff;
+     font-size: 24px;
+     margin: 0;
+ }
+
+ .searchBar {
+     position: relative;
+     display: flex;
+     align-items: center;
+     gap: 10px;
+ }
+
+ #inputSearch {
+     width: 300px;
+     padding: 8px 30px 8px 10px;
+     height: 38px;
+     border-radius: 5px;
+     border: 1px solid #ccc;
+ }
+
+ #iconSearch {
+     position: absolute;
+     right: 10px;
+     top: 50%;
+     transform: translateY(-50%);
+     color: #bababa;
+     font-size: 16px;
+ }
+
+ .navMenu ul {
+     display: flex;
+     gap: 20px;
+     list-style: none;
+     margin: 0;
+ }
+
+ .navMenu a {
+     text-decoration: none;
+     font-size: 16px;
+     font-weight: 500;
+     color: #fff;
+ }
+
+ .navMenu a:hover {
+     color: #ddd;
+ }
+
+ .hero-section {
+     background: #6a5acd;
+     padding: 40px 20px;
+     text-align: center;
+ }
+
+ .hero-section h2 {
+     color: #fff;
+     font-size: 36px;
+     margin-bottom: 20px;
+     font-weight: 700;
+ }
+
+ .sort-container {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 0 30px;
+     gap: 10px;
+ }
+
+ #btnPlay {
+     background: #ffd700;
+     color: #000;
+     border: none;
+     padding: 10px 20px;
+     font-size: 18px;
+     font-weight: 600;
+     border-radius: 5px;
+     cursor: pointer;
+     transition: background 0.3s ease;
+ }
+
+ #btnPlay:hover {
+     background: #e6c200;
+ }
+
+ h3 {
+     max-width: 1200px;
+     margin: 20px auto;
+     font-size: 24px;
+     font-weight: 600;
+     color: #333;
+ }
+
+ .quizzList {
+     display: grid;
+     grid-template-columns: repeat(2, 1fr);
+     gap: 20px;
+     max-width: 1200px;
+     margin: 20px auto;
+     padding: 0 30px;
+ }
+
+ .quizzItem {
+     background: #fff;
+     border: 1px solid #ddd;
+     border-radius: 10px;
+     display: flex;
+     flex-direction: column;
+     transition: transform 0.3s ease, box-shadow 0.3s ease;
+     height: 155px;
+ }
+
+ .quizzItem:hover {
+     transform: translateY(-5px);
+     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+ }
+
+ .quizzContent {
+     display: flex;
+     flex-direction: row;
+ }
+
+ .quizzImg {
+     margin-left: 12px;
+     margin-top: 16px;
+     width: 120px;
+     height: 120px;
+ }
+
+ .quizzInfo {
+     padding: 15px;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+ }
+
+ .quizzInfo p:first-child {
+     font-size: 14px;
+     color: #666;
+     display: flex;
+     align-items: center;
+ }
+
+ .quizzInfo strong {
+     font-size: 16px;
+     font-weight: 600;
+     color: #333;
+     margin-bottom: 5px;
+ }
+
+ .quizzInfo p:last-child {
+     font-size: 14px;
+     color: #666;
+ }
+
+ .quizzBtn {
+     padding: 10px 15px;
+ }
+
+ .quizzBtn button {
+     background: #ffd700;
+     color: #000;
+     border: none;
+     padding: 8px 15px;
+     font-size: 14px;
+     font-weight: 600;
+     border-radius: 5px;
+     cursor: pointer;
+     transition: background 0.3s ease;
+     margin-top: 93px;
+     margin-left: 44px;
+ }
+
+ .quizzBtn button:hover {
+     background: #e6c200;
+ }
+
+ .pagination {
+     display: flex;
+     justify-content: center;
+     margin: 30px 0;
+ }
+
+ .pagination button {
+    font-weight: 533;
+     width: 40px;
+     height: 40px;
+     border: 1px solid #ddd;
+     background: #fff;
+     color: #0D6EFD;
+     font-size: 16px;
+     cursor: pointer;
+     padding: 0;
+ }
+
+ .pagination button:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-left: 1px solid #ddd;
+    color: black;
+ }
+
+ .pagination button:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-right: 1px solid #ddd;
+    color: black;
+ }
+
+ .pagination .btnPage {
+    border: 1px solid #ddd;
+ }
+
+ .pagination .btnPage:last-child {
+    border-right: none;
+ }
+
+ .pagination button.active {
+    background: #007BFF;
+    color: #fff;
+    /* border-color: #007BFF; */
+    
+ }
+
+ .pagination button:hover {
+    background: #e7ecf1;
+    border: none;
+ }
+
+ .pagination button:disabled {
+    color: #999;
+    cursor: not-allowed;
+ }
+
+ footer {
+    width: 100%;
+    background: #2b2b2b;
+    color: #fff;
+    text-align: center;
+    padding: 12px;
+ }
+ .btn {
+    background: #fff;
+    color: #000;
+    border: 1px solid #de2828!important;
+    border-radius: 5px;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+ }
+
+ /* .btn:hover {
+     background: #f0f0f0;
+ }
+ .btn.active {
+     background: #ffd700;
+     color: #000;
+     border-color: #ffd700;
+ } */
+ #sort{
+    display: flex;
+    align-items: center;
+        gap: 10px;
+ }
+ /* .sort-container{
+     margin: 0;
+ } */
+#sort p{
+    margin: 0;
+    /* border: 1px solid black; */
+}
+.btn {
+    margin: 0;
+}
+@media (max-width: 1024px) {
+    .quizzList {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 815px) and (min-width: 769px) {
+    .quizzList {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        padding: 0 20px;
+    }
+
+    .quizzItem {
+        height: 140px;
+    }
+
+    .quizzContent {
+        width: 100%;
+    }
+
+    .quizzImg {
+        width: 100px;
+        height: 100px;
+        margin-left: 10px;
+        margin-top: 14px;
+    }
+
+    .quizzInfo {
+        padding: 10px;
+    }
+
+    .quizzInfo p:first-child {
+        font-size: 12px;
+    }
+
+    .quizzInfo strong {
+        font-size: 14px;
+    }
+
+    .quizzInfo p:last-child {
+        font-size: 12px;
+    }
+
+    .quizzBtn button {
+        margin-top: 78px;
+        margin-left: 34px;
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .sort-container {
+        padding: 0 20px;
+    }
+
+    .pagination {
+        margin: 20px 0;
+    }
+
+    .pagination button {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    .quizzList {
+        grid-template-columns: 1fr;
+    }
+
+    .sort-container {
+        display: flex;
+        margin-left: 46px;
+    }
+
+    .quizzContent {
+        width: 100%;
+    }
+
+    .quizzItem {
+        width: 86%;
+        margin: 0 auto;
+    }
+
+    .pagination {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .quizzList {
+        grid-template-columns: 1fr;
+    }
+
+    .quizzContent {
+        width: 100%;
+    }
+
+    .header-container {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+    }
+
+    .searchBar {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    #inputSearch {
+        width: 100%;
+    }
+
+    .navMenu ul {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="header-container">
+            <div class="textLogo">
+                <h3>QuizzForge</h3>
+            </div>
+            <div class="searchBar">
+                <input type="text" class="form-control" id="inputSearch" placeholder="Search for test" />
+                <i class="fa-solid fa-magnifying-glass" id="iconSearch"></i>
+            </div>
+            <nav class="navMenu">
+                <ul>
+                    <li><a href="../pages/dashBoard.html">Home</a></li>
+                    <li><a href="../pages/login.html" id="logoutLink">Log out</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div>
+            <h2>Let's try a random puzzle <span><i class="fa-solid fa-dice" style="color: #a385a0;"></i></span></h2>
+            <button id="btnPlay">Play</button>
+        </div>
+    </section>
+
+    <h3 class="text-center">⭐ Featured quizzes</h3>
+
+    <div class="sort-container">
+        <div id="sort">
+            <p>Sort by</p>
+            <button class="btn" id="sortBtn">Ascending</button>
+            <button class="btn" id="sortBtn2">Descending</button>
+        </div>
+    </div>
+
+    <div class="quizzList" id="quizzList"></div>
+
+    
+    <div class="pagination" id="pagination"></div>
+
+    <footer>
+        <div class="text-center">
+            <p>&copy; 2023 Quiz App. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/0c1f5dacbd.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <script src="../js/dashBoard.js"> </script> -->
+     <script>
+        let quizzes = JSON.parse(localStorage.getItem("testList")) || [];
+quizzes = quizzes.map(quiz => ({
+    id: quiz.id,
+    image: "../assets/image.png",
+    category: quiz.cate,
+    title: quiz.name,
+    stats: `${quiz.ques} câu hỏi - ${quiz.plays || 0} lượt chơi`,
+    plays: quiz.plays || 0 
+}));
+
+const totalPerPage = 4;
+let currentPage = 1;
+
+function renderQuizzes(page, quizData) {
+    if (!quizData) quizData = quizzes
+    const start = (page - 1) * totalPerPage
+    const end = start + totalPerPage
+    const quizze = quizData.slice(start, end)
+
+    const quizzList = document.getElementById('quizzList')
+    quizzList.innerHTML = '';
+
+    quizze.forEach(quiz => {
+        const quizzItem = document.createElement('div');
+        quizzItem.className = 'quizzItem';
+        quizzItem.innerHTML = `
+            <div class="quizzContent">
+                <div class="quizzImg">
+                    <img src="${quiz.image}" alt="Quiz Image" />
+                </div>
+                <div class="quizzInfo">
+                    <p>${quiz.category}</p>
+                    <strong>${quiz.title}</strong>
+                    <p>${quiz.stats}</p>
+                </div>
+                <div class="quizzBtn">
+                    <button class="btnStartPlay" onclick="window.location.href='../pages/test.html?id=${quiz.id}'">Chơi</button>
+                </div>
+            </div>
+        `;
+        quizzList.appendChild(quizzItem);
+    });
+}
+
+function renderPagination(quizData) {
+    if (!quizData) quizData = quizzes;
+    const totalPage = Math.ceil(quizData.length / totalPerPage)
+    const pagination = document.getElementById('pagination')
+    pagination.innerHTML = '';
+
+    const btnPrev = document.createElement('button')
+    btnPrev.id = 'btnPrev';
+    btnPrev.innerHTML = '<i class="fa fa-chevron-left"></i>';
+    btnPrev.disabled = currentPage === 1;
+    btnPrev.onclick = function() {
+        if (currentPage > 1) {
+            currentPage--
+            renderQuizzes(currentPage, quizData)
+            renderPagination(quizData)
+        }
+    };
+    pagination.appendChild(btnPrev)
+
+    for (let i = 1; i <= totalPage; i++) {
+        const btnPage = document.createElement('button');
+        btnPage.className = `btnPage ${i === currentPage ? 'active' : ''}`;
+        btnPage.textContent = i;
+        btnPage.onclick = function() {
+            currentPage = i
+            renderQuizzes(currentPage, quizData)
+            renderPagination(quizData)
+        };
+        pagination.appendChild(btnPage)
+    }
+
+    const btnNext = document.createElement('button');
+    btnNext.id = 'btnNext';
+    btnNext.innerHTML = '<i class="fa fa-chevron-right"></i>';
+    btnNext.disabled = currentPage === totalPage;
+    btnNext.onclick = function() {
+        if (currentPage < totalPage) {
+            currentPage++
+            renderQuizzes(currentPage, quizData)
+            renderPagination(quizData)
+        }
+    };
+    pagination.appendChild(btnNext)
+}
+
+document.getElementById('inputSearch').input = function(e) {
+    const searchs = e.target.value.trim().toLowerCase();
+    const filtered = [];
+    for (let i = 0; i < quizzes.length; i++) {
+        if (quizzes[i].title.toLowerCase().indexOf(searchs) !== -1 || 
+            quizzes[i].category.toLowerCase().indexOf(searchs) !== -1) {
+            filtered.push(quizzes[i])
+        }
+    }
+    currentPage = 1
+    renderQuizzes(currentPage, filtered)
+    renderPagination(filtered)
+};
+
+document.getElementById('sortBtn').onclick = function() {
+    const sorted = [];
+    for (let i = 0; i < quizzes.length; i++) {
+        sorted[i] = quizzes[i]
+    }
+    sorted.sort(function(a, b) { return a.plays - b.plays; });
+    currentPage = 1
+    renderQuizzes(currentPage, sorted)
+    renderPagination(sorted)
+    document.getElementById('sortBtn').classList.add('active')
+    document.getElementById('sortBtn2').classList.remove('active')
+};
+
+document.getElementById('sortBtn2').onclick = function() {
+    const sorted = [];
+    for (let i = 0; i < quizzes.length; i++) {
+        sorted[i] = quizzes[i]
+    }
+    sorted.sort(function(a, b) { return b.plays - a.plays; });
+    currentPage = 1
+    renderQuizzes(currentPage, sorted)
+    renderPagination(sorted)
+    document.getElementById('sortBtn2').classList.add('active')
+    document.getElementById('sortBtn').classList.remove('active')
+};
+
+renderQuizzes(currentPage)
+renderPagination()
+     </script>
+</body>
+
+</html>

@@ -4,12 +4,203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/testManagement.css">
+    <!-- <link rel="stylesheet" href="../css/testManagement.css"> -->
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/testManagement.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/testManagement.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <title>Test management</title>
+    <style>le>* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #343a40;
+    color: white;
+    padding: 5px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    margin-right: 25px;
+}
+
+nav a.active {
+    font-weight: bold;
+}
+
+.mainContent {
+    flex: 1;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+footer {
+    position: fixed;
+    background-color: #343a40;
+    color: white;
+    padding: 12px 5px 2px 10px;
+    text-align: center;
+    width: 100%;
+    bottom: 0;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 0;
+}
+
+.filters {
+    display: flex;
+    gap: 10px;
+    width: 460px;
+}
+
+.search-container {
+    position: relative;
+    width: 470px;
+}
+
+#inputSearch {
+    padding-right: 40px;
+}
+
+#iconSearch {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #6c757d;
+}
+
+#statusFilter {
+    width: 250px;
+}
+
+.table th,
+.table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.btn.yellow {
+    background-color: #ffc107;
+    color: white;
+}
+
+.btn.red {
+    background-color: #dc3545;
+    color: white;
+}
+
+.modal-content {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.modal-content .error {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+    display: none;
+}
+
+.table tbody tr:nth-child(even) td {
+    background-color: #f5f5f6;
+}
+
+.table tbody tr:nth-child(odd) td {
+    background-color: #FFFFFF;
+}
+
+.error-message {
+    display: none;
+    color: red;
+}
+
+ .pagination {
+     display: flex;
+     justify-content: center;
+     margin: 20px 0;
+ }
+
+ .pagination button {
+     width: 40px;
+     height: 40px;
+     font-weight: 555;
+     border: 1px solid #ddd;
+     background: #fff;
+     color: #0D6EFD;
+     font-size: 16px;
+     cursor: pointer;
+     padding: 0;
+ }
+
+ .pagination button:first-child {
+     border-top-left-radius: 10px;
+     border-bottom-left-radius: 10px;
+ }
+
+ .pagination button:last-child {
+     border-top-right-radius: 10px;
+     border-bottom-right-radius: 10px;
+ }
+
+ #btnPages button {
+     border-radius: 0;
+ }
+
+ .pagination button:not(:first-child) {
+     border-left: none;
+ }
+
+ .pagination button.btn-active {
+     background: #007BFF;
+     color: #fff;
+     border-color: #007BFF;
+ }
+ .pagination button:hover {
+     background: #e7ecf1;
+     border: none;
+ }
+
+ .pagination button:disabled {
+     color: #999!important;
+     cursor: not-allowed;
+ }
+ /* .pagination button:hover {
+    background-color: rgba(240, 248, 255, 0.973);
+} */
+
+ /* opacity: 0.5; */
+ .pagination button:disabled {
+     color: #999;
+     cursor: not-allowed;
+ }</style>
 </head>
 
 <body>

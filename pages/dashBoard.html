@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/home.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/home.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <title>Home</title>
+    <title>Dash board</title>
 </head>
 
 <body>
@@ -32,7 +32,8 @@
 
     <section class="hero-section">
         <div>
-            <h2>Let's try a random puzzle <span><i class="fa-solid fa-dice" style="color: #a385a0;"></i></span></h2>
+            <h2>Let's try a random puzzle <span>🎲</span></h2>
+            <!-- <i class="fa-solid fa-dice" style="color: #a385a0;"></i> -->
             <button id="btnPlay">Play</button>
         </div>
     </section>
@@ -49,8 +50,11 @@
 
     <div class="quizzList" id="quizzList"></div>
 
-    
-    <div class="pagination" id="pagination"></div>
+    <div class="pagination">
+        <button id="btnPrev" class="pagination-btn" style="color: black;"><i class="fa fa-chevron-left"></i></button>
+        <div id="btnPages" class="pagination-pages"></div>
+        <button id="btnNext" class="pagination-btn" style="color: black;"><i class="fa fa-chevron-right"></i></button>
+    </div>
 
     <footer>
         <div class="text-center">
@@ -60,7 +64,7 @@
 
     <script src="https://kit.fontawesome.com/0c1f5dacbd.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/dashBoard.js"> </script>
+   <script src="../js/dashBoard.js"></script>
 </body>
 
 </html>

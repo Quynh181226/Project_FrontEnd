@@ -1,19 +1,19 @@
-// const category11 = document.querySelector("#category1")
-// const theTest = document.querySelector("#the-test1")
-// const logOut1=document.querySelector("#log-out1")
+const category11 = document.querySelector("#category1")
+const theTest = document.querySelector("#the-test1")
+const logOut1 = document.querySelector("#log-out1")
 
-// category11.addEventListener("click", (e) => {
-//     window.location("../pages/categoryManagement.html")
-// })
+category11.addEventListener("click", (e) => {
+    window.location = "../pages/categoryManagement.html"
+})
 
-// theTest.addEventListener("click", (e) => {
-//     window.location("../pages/testManagement1.html")
-// })
+theTest.addEventListener("click", (e) => {
+    window.location = "../pages/testManagement1.html"
+})
 
-// logOut1.addEventListener("click", (e) => {
-//     localStorage.removeItem("isLoggedIn")
-//     window.location("../pages/login.html")
-// })
+logOut1.addEventListener("click", (e) => {
+    localStorage.removeItem("isLoggedIn")
+    window.location = "../pages/login.html"
+})
 //function category 
 function renderCategory() {
     //lay gtri tren local
@@ -184,26 +184,76 @@ const btnEditQuestion = document.querySelectorAll('.btn-edit-question');
         });
     });
 }
-
+/////////////////////////////////////
 document.getElementById('save-question').addEventListener('click', () => {
-    //Validate data before save ques
-    //1. Ques not empty
-    if (!question.content.trim()) return
-    //2. Ques length least to answer
-    if (question.answers.length < 2) return
-    //3. Ques least one answer true
-    //c1
-    let check = false;
-    for (let ans of question.answers) {
-        if (ans.isCorrected) {
+    const questionErrorEmp=document.getElementById("question-error-emp")
+    const questionErrorLength=document.getElementById("question-error-length")
+    const answerErrorMin=document.getElementById("answer-error-min")
+    const answerErrorEmp=document.getElementById("answer-error-emp")
+    const answerErrorLength=document.getElementById("answer-error-length")
+    const answerErrorCorrect=document.getElementById("answer-error-correct")
+    let check = true
+    //empty
+    if (!question.content.trim()) {
+        questionErrorEmp.style.display = "block"
+        check=false
+    } else {
+        questionErrorEmp.style.display="none"
+    }
+    //length
+    if (!question.content.length<1||question.content.length>50) {
+        questionErrorLength.style.display = "block"
+        check=false
+    } else {
+        questionErrorLength.style.display="none"
+    }
+    //min
+    if (!question.answers.length<2) {
+        answerErrorMin.style.display = "block"
+        check=false
+    } else {
+        answerErrorMin.style.display="none"
+    }
+    //correct
+    // if (!question.content.trim()) {
+    //     questionErrorEmp.style.display = "block"
+    //     check=false
+    // } else {
+    //     questionErrorEmp.style.display="none"
+    // }
+    //anwer empty
+    for (let i = 0; i < question.answers.length; i++){
+        if (question.answers[i].answer.length > 1 || question.answers[i].answer.length < 50) {
             check = true
+            answerErrorCorrect.style.display="none"
             break
+        } else {
+            answerErrorCorrect.style.display="block"
         }
     }
-    if (!check) return
-    //c2
-//     const found = question.answers.find(ans => ans.isCorrected);
-//     if (!found) return;
+    
+    
+    
+    
+   
+//     //Validate data before save ques
+//     //1. Ques not empty
+//     if (!question.content.trim()) return
+//     //2. Ques length least to answer
+//     if (question.answers.length < 2) return
+//     //3. Ques least one answer true
+//     //c1
+//     // let check = false;
+//     for (let ans of question.answers) {
+//         if (ans.isCorrected) {
+//             check = true
+//             break
+//         }
+//     }
+//     if (!check) return
+//     //c2
+// //     const found = question.answers.find(ans => ans.isCorrected);
+// //     if (!found) return;
     if (editIndex === -1) {
         questionList.push(question);
     } else {
@@ -231,16 +281,63 @@ document.getElementById('save-question').addEventListener('click', () => {
     const modal = bootstrap.Modal.getInstance(modalElement);
     modal.hide();
 });
+///////////////////////////////////
 document.getElementById('btn-save-test').addEventListener('click', () => {
-    //Validate data before save
-    //1. testName not empty
-    if (!test.testName.trim()) return 
-    //2. cate not empty
-    if (test.categoryId === -1) return
-    //3. time not <0
-    if (test.playTime <= 0) return
-    //4. quesList <=1(least 1 ques)
-    const listTestLocal = JSON.parse(localStorage.getItem('list-test') || '[]')
+    // //Validate data before save
+    // //1. testName not empty
+    // if (!test.testName.trim()) return 
+    // //2. cate not empty
+    // if (test.categoryId === -1) return
+    // //3. time not <0
+    // if (test.playTime <= 0) return
+    // //4. quesList <=1(least 1 ques)
+
+    //Tên bài test không được trùng nhau và có độ dài xác định
+    // <small class="error-message" id="name-error-emp">Test name cannot be empty</small>
+    // <small class="error-message" id="name-error-length">Test name must be between(1-50)characters</small>
+    // <small class="error-message" id="name-error-dupli">Test name exists</small>
+    // <small class="error-message" id="cate-error">Category is empty</small>
+    //  <small class="error-message" id="time-error">Time must be greater than 0</small>
+    const nameErrorEmp = document.getElementById("name-error-emp")
+    const nameErrorLeng = document.getElementById("name-error-length")
+    const nameErrorDupli = document.getElementById("name-error-dupli")
+    const cateError = document.getElementById("cate-error")
+    const timeError = document.getElementById("time-error")
+    let check = true
+    // 1. name test not empty
+    // 2. name test not exist
+    // 3. name test must ... length xdinh
+    // Kiểm tra testName: không trống
+    //ques empty
+    if (!question.content.trim()){
+        nameErrorEmp.style.display = "block"
+        check = false
+    } else {
+        nameErrorEmp.style.display = "none" 
+    }
+    //ques length
+    if (question.content.length < 1 || question.content.length > 50) {
+        nameErrorLeng.style.display = "block";
+        check = false;
+    } else {
+        nameErrorLeng.style.display = "none";
+    }
+    //ques exits ///////c2......
+    let checkExits = JSON.parse(localStorage.getItem("list-test")) || "[]";
+    
+    // if (let j = 0; j < checkExits.length; j++){
+    //     if (checkExits[i].testName === test.testName) {
+             
+    //     } else {
+
+            
+    //     }
+    // }
+
+
+
+
+    const listTestLocal = JSON.parse(localStorage.getItem('list-test') || [])
     //Check đg edit hay create
     if (testEdit) {
         //c1
@@ -285,3 +382,10 @@ document.getElementById('btn-save-test').addEventListener('click', () => {
     document.querySelector('h2').textContent="Create the test"
     renderTestListQuestion()
 }) 
+
+
+
+
+
+
+

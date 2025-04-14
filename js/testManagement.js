@@ -9,10 +9,6 @@
 //Dieu huong: Cac nut so trang cap nhat currentPage vs lm ms giao dien
 //Trang thai nut đc add or remove disabled dua tren vtri cua curr...
 
-//ý tưởng của e la muốn lấy danh mục của arrCate... và sau đó khi thêm hay khi sửa nó
-//sẽ hiện ở phần chọn danh mục và sau đó add vào local => testList sau đó khi render sẽ là ra dữ liệu của testList(nhưng mà lúc đầu cũng đúng đúng rồi nhưng mà hình như e chỉnh cái gì ý trung quy là chỉnh tên key nên giờ nó còn sai ác hơn giwof không biết chỉnh sao cho đúng )
-//lúc đầu chỉ là cái cate nó hiện số như kiểu id ý nên em mới muốn fix sao để hiện đúng nhưng mà giờ thì sai ác chung quy em cảm giác mình chưa đủ hiểu logic code 
-//giờ phải làm sao để fix đúng nhỉ 
 let testList = JSON.parse(localStorage.getItem("testList")) || [];
 const testListEl = document.getElementById("test-list")
 const selectOp = document.getElementById("select-op")
@@ -68,7 +64,7 @@ function renderCategory(el) {
 function cateById(cateId) {
     const categories = JSON.parse(localStorage.getItem("arrCategories")) || [];
     const category = categories.find(item => item.id === cateId.toString());
-    return category ? `${category.emoji} ${category.name}` : "Unknown Category";
+    return `${category.emoji} ${category.name}` 
 } 
 
 function searchOp() {
@@ -88,16 +84,16 @@ function searchOp() {
 function renderTest() {
     //console.log(testList);
     //tinh toan phan trang dua tren searchTest
-    const searchTest = searchOp(); //tại sao lại phải gọi trong này searchTest thì có liên quan gì đến  totalPage và mấy cái nữa chẳng hiểu 
-    const totalPage = getTotalPage(searchTest); //cả cái này nữa tại sao lại là search...mà không phải là cái khác sao tôi thấy cái logic này cứ buồn cười thế nào ấy
+    const searchTest = searchOp() 
+    const totalPage = getTotalPage(searchTest)
     // const totalPage = Math.ceil(searchTest.length / totalPerPage)
     //dchinh currentPage if over totalPage
     if (currentPage > totalPage && totalPage > 0) {
         currentPage = totalPage;
     }
-    const start = (currentPage - 1) * totalPerPage;
-    const end = start + totalPerPage;
-    const items = searchTest.slice(start, end);
+    const start = (currentPage - 1) * totalPerPage
+    const end = start + totalPerPage
+    const items = searchTest.slice(start, end)
     //console.log(items);
     //sau khi viet function find id cate=>can call function and input value need display khi duyet = inner... qua testListEl = 1 mang gtri ms
     testListEl.innerHTML = items.map(test => `
@@ -112,73 +108,75 @@ function renderTest() {
                 <button class="btn btn-danger btn-sm" onclick="openDeleteModal(${test.id})">Delete</button>
             </td>
         </tr>
-    `).join("");
+    `).join("")
 
     //Tao nut phan trang
-    btnPagesEl.innerHTML = "";
+    //1.Reset
+    //2.Duyet qua den totalPage (dua vao tong so trang)...................
+    btnPagesEl.innerHTML = ""
     for (let i = 1; i <= totalPage; i++) {
-        const btnEl = document.createElement("button");
+        const btnEl = document.createElement("button")
         btnEl.textContent = i;
-        if (currentPage === i) btnEl.classList.add("btn-active");
+        if (currentPage === i) btnEl.classList.add("btn-active")
         btnEl.addEventListener("click", function () {
-            currentPage = i;
-            renderTest();
-            renderPagination();
+            currentPage = i
+            renderTest()
+            renderPagination()
         });
-        btnPagesEl.appendChild(btnEl);
+        btnPagesEl.appendChild(btnEl)
     }
-    renderPagination();
+    renderPagination()
 }
 
 //function update status button
 function renderPagination() {
-    const totalPage = getTotalPage(testList);
-    btnPrevEl.disabled = currentPage === 1;
-    btnNextEl.disabled = currentPage === totalPage;
+    const totalPage = getTotalPage(testList)
+    btnPrevEl.disabled = currentPage === 1
+    btnNextEl.disabled = currentPage === totalPage
 }
 
 //lang nghe skien cho Prev/Next
 btnPrevEl.addEventListener("click", function () {
     if (currentPage > 1) {
-        currentPage--;
-        renderTest();
-        renderPagination();
+        currentPage--
+        renderTest()
+        renderPagination()
     }
 });
 
 btnNextEl.addEventListener("click", function () {
     if (currentPage < getTotalPage(testList)) {
-        currentPage++;
-        renderTest();
-        renderPagination();
+        currentPage++
+        renderTest()
+        renderPagination()
     }
 });
 
 btnAdd.addEventListener("click", () => {
-    renderCategory(testCategory);
-    modalTitle.textContent = "Add Test";
-    testName.value = "";
-    testCategory.value = "";
-    testQuestions.value = "";
-    testTime.value = "";
-    saveTestBtn.textContent = "Add";
+    renderCategory(testCategory)
+    modalTitle.textContent = "Add Test"
+    testName.value = ""
+    testCategory.value = ""
+    testQuestions.value = ""
+    testTime.value = ""
+    saveTestBtn.textContent = "Add"
     modalStatus = {
         mode: "add",
         id: null
     };
-    testModal.show();
+    testModal.show()
 });
 
 function openEditModal(id) {
     renderCategory(testCategory);
     modalTitle.textContent = "Edit Test";
-    const test = testList.find(test => test.id === id);
+    const test = testList.find(test => test.id === id)
     if (test) {
-        testName.value = test.name;
-        testCategory.value = test.cate;
-        testQuestions.value = test.ques;
-        testTime.value = test.time;
-        saveTestBtn.textContent = "Save";
+        testName.value = test.name
+        testCategory.value = test.cate
+        testQuestions.value = test.ques
+        testTime.value = test.time
+        saveTestBtn.textContent = "Save"
         modalStatus = {
             mode: "edit",
             id
@@ -263,12 +261,12 @@ function openDeleteModal(id) {
     document.getElementById("confirmDeleteBtn").onclick = () => {
         const index = testList.findIndex(test => test.id === id);
         if (index !== -1) {
-            testList.splice(index, 1);
-            saveLocal();
-            deleteModal.hide();
-            currentPage = 1;
-            renderTest();
-            renderPagination();
+            testList.splice(index, 1)
+            saveLocal()
+            currentPage = 1
+            renderTest()
+            renderPagination()
+            deleteModal.hide()
         }
     };
 }
@@ -282,7 +280,6 @@ LogIn1.addEventListener("click", (e) => {
     localStorage.removeItem("currentUser");
     window.location.href = "../pages/login.html";
 });
-
 
 category.addEventListener("click", (e) => {
     // e.preventDefault()

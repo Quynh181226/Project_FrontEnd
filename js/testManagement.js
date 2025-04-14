@@ -1,14 +1,3 @@
-  //Pagination
-//B1: Tinh tong so page
-//B2: Tao nut so trang
-//B3: Tinh toan phan trang
-//B4: Hthi dlieu
-//B5: Cap nhat status button Prev/Next
-//Logic:
-//Phan trang: Chia key thanh 4 doan ptu, hthi doan tuong ung vs currnetPage
-//Dieu huong: Cac nut so trang cap nhat currentPage vs lm ms giao dien
-//Trang thai nut đc add or remove disabled dua tren vtri cua curr...
-
 let testList = JSON.parse(localStorage.getItem("testList")) || [];
 const testListEl = document.getElementById("test-list")
 const selectOp = document.getElementById("select-op")

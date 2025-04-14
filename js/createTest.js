@@ -69,7 +69,6 @@ timeInput.addEventListener('change', function (e) {
     test.playTime = +e.target.value;
 });
 
-
 let questionList = []
 let question = {
     content: '',
@@ -164,7 +163,6 @@ const btnEditQuestion = document.querySelectorAll('.btn-edit-question');
     btnEditQuestion.forEach((btnEdit, i) => {
         btnEdit.addEventListener("click", (e) => {
             // Copy ques and ans
-            //1. 
             question = {
                 content: questionList[i].content,
                 answers: []
@@ -184,76 +182,87 @@ const btnEditQuestion = document.querySelectorAll('.btn-edit-question');
         });
     });
 }
-/////////////////////////////////////
+
 document.getElementById('save-question').addEventListener('click', () => {
-    const questionErrorEmp=document.getElementById("question-error-emp")
-    const questionErrorLength=document.getElementById("question-error-length")
-    const answerErrorMin=document.getElementById("answer-error-min")
-    const answerErrorEmp=document.getElementById("answer-error-emp")
-    const answerErrorLength=document.getElementById("answer-error-length")
-    const answerErrorCorrect=document.getElementById("answer-error-correct")
+    const questionErrorEmp = document.getElementById("question-error-emp")
+    const questionErrorLength = document.getElementById("question-error-length")
+    const answerErrorMin = document.getElementById("answer-error-min")
+    const answerErrorEmp = document.getElementById("answer-error-emp")
+    const answerErrorLength = document.getElementById("answer-error-length")
+    const answerErrorCorrect = document.getElementById("answer-error-correct")
     let check = true
-    //empty
+
+    // 1. Question not empty
     if (!question.content.trim()) {
         questionErrorEmp.style.display = "block"
-        check=false
+        check = false
     } else {
-        questionErrorEmp.style.display="none"
+        questionErrorEmp.style.display = "none"
     }
-    //length
-    if (!question.content.length<1||question.content.length>50) {
+
+    // 2. Ques length (1-50) characters
+    if (question.content.length < 1 || question.content.length > 50) {
         questionErrorLength.style.display = "block"
-        check=false
+        check = false
     } else {
-        questionErrorLength.style.display="none"
+        questionErrorLength.style.display = "none"
     }
-    //min
-    if (!question.answers.length<2) {
+
+    // 3. At least 2 answers
+    if (question.answers.length < 2) {
         answerErrorMin.style.display = "block"
-        check=false
+        check = false
     } else {
-        answerErrorMin.style.display="none"
+        answerErrorMin.style.display = "none"
     }
-    //correct
-    // if (!question.content.trim()) {
-    //     questionErrorEmp.style.display = "block"
-    //     check=false
-    // } else {
-    //     questionErrorEmp.style.display="none"
-    // }
-    //anwer empty
-    for (let i = 0; i < question.answers.length; i++){
-        if (question.answers[i].answer.length > 1 || question.answers[i].answer.length < 50) {
-            check = true
-            answerErrorCorrect.style.display="none"
+
+    // 4. Answers not empty
+    let hasEmptyAnswer = false
+    for (let i = 0; i < question.answers.length; i++) {
+        if (!question.answers[i].answer.trim()) {
+            hasEmptyAnswer = true
             break
-        } else {
-            answerErrorCorrect.style.display="block"
         }
     }
-    
-    
-    
-    
-   
-//     //Validate data before save ques
-//     //1. Ques not empty
-//     if (!question.content.trim()) return
-//     //2. Ques length least to answer
-//     if (question.answers.length < 2) return
-//     //3. Ques least one answer true
-//     //c1
-//     // let check = false;
-//     for (let ans of question.answers) {
-//         if (ans.isCorrected) {
-//             check = true
-//             break
-//         }
-//     }
-//     if (!check) return
-//     //c2
-// //     const found = question.answers.find(ans => ans.isCorrected);
-// //     if (!found) return;
+    if (hasEmptyAnswer) {
+        answerErrorEmp.style.display = "block"
+        check = false
+    } else {
+        answerErrorEmp.style.display = "none"
+    }
+
+    // 5. Answer length (1-50) characters
+    let hasInvalidLengthAnswer = false
+    for (let i = 0; i < question.answers.length; i++) {
+        if (question.answers[i].answer.length < 1 || question.answers[i].answer.length > 50) {
+            hasInvalidLengthAnswer = true
+            break
+        }
+    }
+    if (hasInvalidLengthAnswer) {
+        answerErrorLength.style.display = "block"
+        check = false
+    } else {
+        answerErrorLength.style.display = "none"
+    }
+
+    // 6. At least one correct answer
+    let hasCorrectAnswer = false
+    for (let i = 0; i < question.answers.length; i++) {
+        if (question.answers[i].isCorrected) {
+            hasCorrectAnswer = true
+            break
+        }
+    }
+    if (!hasCorrectAnswer) {
+        answerErrorCorrect.style.display = "block"
+        check = false
+    } else {
+        answerErrorCorrect.style.display = "none"
+    }
+
+    if (!check) return
+
     if (editIndex === -1) {
         questionList.push(question);
     } else {
@@ -292,57 +301,72 @@ document.getElementById('btn-save-test').addEventListener('click', () => {
     // if (test.playTime <= 0) return
     // //4. quesList <=1(least 1 ques)
 
-    //Tên bài test không được trùng nhau và có độ dài xác định
-    // <small class="error-message" id="name-error-emp">Test name cannot be empty</small>
-    // <small class="error-message" id="name-error-length">Test name must be between(1-50)characters</small>
-    // <small class="error-message" id="name-error-dupli">Test name exists</small>
-    // <small class="error-message" id="cate-error">Category is empty</small>
-    //  <small class="error-message" id="time-error">Time must be greater than 0</small>
-    const nameErrorEmp = document.getElementById("name-error-emp")
-    const nameErrorLeng = document.getElementById("name-error-length")
+    const nameErrorEmpty = document.getElementById("name-error-empty")
+    const nameErrorLength = document.getElementById("name-error-length")
     const nameErrorDupli = document.getElementById("name-error-dupli")
     const cateError = document.getElementById("cate-error")
     const timeError = document.getElementById("time-error")
     let check = true
-    // 1. name test not empty
-    // 2. name test not exist
-    // 3. name test must ... length xdinh
-    // Kiểm tra testName: không trống
-    //ques empty
-    if (!question.content.trim()){
-        nameErrorEmp.style.display = "block"
+
+    // 1. Test name not empty
+    if (!test.testName.trim()) {
+        nameErrorEmpty.style.display = "block"
         check = false
     } else {
-        nameErrorEmp.style.display = "none" 
+        nameErrorEmpty.style.display = "none"
     }
-    //ques length
-    if (question.content.length < 1 || question.content.length > 50) {
-        nameErrorLeng.style.display = "block";
-        check = false;
+
+    // 2. Test name length (1-50) characters
+    if (test.testName.length < 1 || test.testName.length > 50) {
+        nameErrorLength.style.display = "block"
+        check = false
     } else {
-        nameErrorLeng.style.display = "none";
+        nameErrorLength.style.display = "none"
     }
-    //ques exits ///////c2......
-    let checkExits = JSON.parse(localStorage.getItem("list-test")) || "[]";
-    
-    // if (let j = 0; j < checkExits.length; j++){
-    //     if (checkExits[i].testName === test.testName) {
-             
-    //     } else {
 
-            
-    //     }
-    // }
+    // 3. Test name not duplicate (skip if editing the same test)
+    let listTestLocal = JSON.parse(localStorage.getItem("list-test") || "[]")
+    let isDuplicate = false
+    if (!testEdit) { // Only check for duplicates when creating a new test
+        for (let i = 0; i < listTestLocal.length; i++) {
+            if (listTestLocal[i].testName.toLowerCase() === test.testName.toLowerCase()) {
+                isDuplicate = true
+                break
+            }
+        }
+    }
+    if (isDuplicate) {
+        nameErrorDupli.style.display = "block"
+        check = false
+    } else {
+        nameErrorDupli.style.display = "none"
+    }
 
+    // 4. Category not empty
+    if (test.categoryId === -1) {
+        cateError.style.display = "block"
+        check = false
+    } else {
+        cateError.style.display = "none"
+    }
 
+    // 5. Time greater than 0
+    if (test.playTime <= 0) {
+        timeError.style.display = "block"
+        check = false
+    } else {
+        timeError.style.display = "none"
+    }
 
+    // 6. At least one question
+    if (questionList.length === 0) {
+        check = false
+    }
 
-    const listTestLocal = JSON.parse(localStorage.getItem('list-test') || [])
-    //Check đg edit hay create
+    if (!check) return
+
+    // Save the test
     if (testEdit) {
-        //c1
-        //   const index = listTestLocal.findIndex(item => item.id === test.id);
-        //c2
         let index = -1;
         for (let i = 0; i < listTestLocal.length; i++) {
             if (listTestLocal[i].id === test.id) {
@@ -352,7 +376,7 @@ document.getElementById('btn-save-test').addEventListener('click', () => {
         }
         if (index !== -1) {
             test.questions = questionList
-            listTestLocal[index]=test
+            listTestLocal[index] = test
         }
     } else {
         if (listTestLocal.length === 0) {
@@ -360,9 +384,10 @@ document.getElementById('btn-save-test').addEventListener('click', () => {
         } else {
             test.id = listTestLocal[listTestLocal.length - 1].id + 1
         }
-    test.questions = questionList
-    listTestLocal.push(test) 
+        test.questions = questionList
+        listTestLocal.push(test) 
     }
+
     //??????????? 
     localStorage.setItem('list-test', JSON.stringify(listTestLocal))
     //Reset data and del 'key' after save
@@ -379,13 +404,6 @@ document.getElementById('btn-save-test').addEventListener('click', () => {
     document.getElementById('testName').value = '';
     document.getElementById('category-test').value = '';
     document.getElementById('time').value = '';
-    document.querySelector('h2').textContent="Create the test"
+    document.querySelector('h2').textContent = "Create the test"
     renderTestListQuestion()
 }) 
-
-
-
-
-
-
-

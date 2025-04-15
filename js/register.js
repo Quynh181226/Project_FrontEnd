@@ -71,7 +71,7 @@ if (registerForm) {
 
             localStorage.setItem("isLoggedIn", "true");
             localStorage.setItem("currentUser", JSON.stringify(newUser));
-            window.location.href = "../pages/dashboard.html";
+            window.location.href = "../pages/login.html";
         }
     });
 }

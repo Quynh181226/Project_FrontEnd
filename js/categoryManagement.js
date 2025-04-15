@@ -186,11 +186,12 @@ const arrCategories = JSON.parse(localStorage.getItem("arrCategories")) || [
                             id: (arrCategories.length + 1).toString(),
                             name,
                             emoji
-                        });
+                        })
                         // localStorage.setItem("arrCategoryId", Id.toString());
 
                         // console.log("addddddddd cate"); 
                     }
+                    // currentPage=1
                     localStorage.setItem("arrCategories", JSON.stringify(arrCategories));
                     renderData()
                     renderPagination()
@@ -237,7 +238,7 @@ const arrCategories = JSON.parse(localStorage.getItem("arrCategories")) || [
         testManagement.addEventListener("click", (e) => {
             // e.preventDefault()
             // localStorage.getItem("isLoggeIn")
-            window.location.href = "../pages/testManagement1.html"
+            window.location.href = "../pages/testManagement.html"
         })
 
         categoryManagement.addEventListener("click", (e) => {
